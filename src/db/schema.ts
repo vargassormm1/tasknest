@@ -4,12 +4,13 @@ import {
   boolean,
   pgTableCreator,
   timestamp,
+  serial,
 } from "drizzle-orm/pg-core";
 
 export const createTable = pgTableCreator((name) => `tasknest_${name}`);
 
 export const users = createTable("users", {
-  id: integer("id").primaryKey(),
+  id: serial("id").primaryKey(),
   clerkId: text("clerkId").notNull(),
   fname: text("fname").notNull(),
   lname: text("lname").notNull(),
@@ -18,14 +19,14 @@ export const users = createTable("users", {
 });
 
 export const groups = createTable("groups", {
-  id: integer("id").primaryKey(),
+  id: serial("id").primaryKey(),
   name: text("name").notNull(),
   emoji: text("emoji"),
   userId: integer("userId").references(() => users.id),
 });
 
 export const todos = createTable("todos", {
-  id: integer("id").primaryKey(),
+  id: serial("id").primaryKey(),
   text: text("text").notNull(),
   completed: boolean("done").default(false).notNull(),
   dueDate: timestamp("dueDate"),
