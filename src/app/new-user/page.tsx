@@ -36,10 +36,10 @@ const createNewUser = async () => {
         imageUrl: String(user.imageUrl),
       });
     }
-
-    redirect("/todo");
   } catch (error) {
     console.error("Error creating new user:", error);
+  } finally {
+    redirect("/todo");
   }
 };
 

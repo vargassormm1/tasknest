@@ -9,23 +9,27 @@ import Link from "next/link";
 
 const Navbar = () => {
   return (
-    <div className="w-full flex justify-between py-4 items-center border-b-2 border-black min-h-28">
-      <h1 className="text-2xl font-bold">TaskNest</h1>
-      <ul className="flex">
-        <SignedOut>
-          <li className="px-2 py-4">
-            <Link href={"/sign-in"}>Signin</Link>
-          </li>
-          <li className="px-2 py-4">
-            <Link href={"/sign-up"}>Signup</Link>
-          </li>
-        </SignedOut>
-        <SignedIn>
-          <li className="px-2 py-4">
-            <UserButton />
-          </li>
-        </SignedIn>
-      </ul>
+    <div className="navbar bg-base-100">
+      <div className="flex-1">
+        <a className="btn btn-ghost text-xl">TaskNest</a>
+      </div>
+      <div className="flex-none">
+        <ul className="menu menu-horizontal px-1">
+          <SignedOut>
+            <li>
+              <Link href={"/sign-in"}>Signin</Link>
+            </li>
+            <li>
+              <Link href={"/sign-up"}>Signup</Link>
+            </li>
+          </SignedOut>
+          <SignedIn>
+            <li>
+              <UserButton />
+            </li>
+          </SignedIn>
+        </ul>
+      </div>
     </div>
   );
 };
