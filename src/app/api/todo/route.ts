@@ -55,15 +55,16 @@ export const POST = async (request: NextRequest) => {
       );
     }
 
-    const userExists = await db
+    const existingUser = await db
       .select({
+        id: users.id,
         clerkId: users.clerkId,
         email: users.email,
       })
       .from(users)
       .where(eq(users.clerkId, userId));
 
-    if (userExists.length === 0) {
+    if (existingUser.length === 0) {
       return NextResponse.json({ error: "User not found." }, { status: 404 });
     }
 
@@ -78,11 +79,10 @@ export const POST = async (request: NextRequest) => {
       .values({
         text: String(data.text),
         dueDate: data.dueDate ? new Date(data.dueDate) : null,
-        userId: Number(userId),
+        userId: Number(existingUser[0].id),
         groupId: Number(data.groupId),
       })
       .returning();
-
     return NextResponse.json({ data: newTodo });
   } catch (error) {
     console.error("Error creating todo:", error);

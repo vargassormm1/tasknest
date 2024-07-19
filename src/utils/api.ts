@@ -18,7 +18,7 @@ export const getTodos = async () => {
 
 export const createTodo = async (content: {
   text: string;
-  dueDate?: string;
+  dueDate?: string | null;
   groupId: number;
 }) => {
   try {
